@@ -24,7 +24,8 @@ Il cubo come si può vedere nel video appare all'interno della schermata. Decido
 ## Design dell’interfraccia e modalià di interazione
 L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stessa cosa vale per il testo. l'oggetto tridimensionale inoltre lo puoi muovere all'interno dello spazio semplicemente cliccandolo. Lo si può ruotare a 360 gradi ed ingrandire e rimpicciole. Per far si che tu possa giocarci come vuoi, l'oggetto lo si può vedere anche dietro al testo, oppure puoi semplicemnte nascondere la parte scritta.
 
-[<img src="doc/cards.gif" width="500" alt="Magic trick">]()
+[<img src="doc/aperto.jpg" width="300" alt="Supplemento al dizionario italiano">]()
+[<img src="doc/chiuso.jpg" width="300" alt="Supplemento al dizionario italiano">]()
 
 
 ## Tecnologia usata
