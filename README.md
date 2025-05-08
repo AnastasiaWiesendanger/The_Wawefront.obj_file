@@ -14,9 +14,12 @@ Per questo lavoro, tutti gli studenti che frequentano il corso di "Interaction D
 
 
 ## Riferimenti progettuali
-Dolor sit amet consectetur adipiscing elit duis tristique. Sociis natoque penatibus et magnis dis parturient montes nascetur. Est sit amet facilisis magna. Tellus rutrum tellus pellentesque eu. Dictum sit amet justo donec enim. Aliquam malesuada bibendum arcu vitae elementum curabitur vitae. Sed faucibus turpis in eu mi bibendum neque egestas congue. Tellus in metus vulputate eu scelerisque felis imperdiet proin. Dolor magna eget est lorem ipsum dolor. Sit amet mattis vulputate enim nulla. Elit pellentesque habitant morbi tristique senectus et. Vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa.
+Una delle prime cose che ho fatto, è stato (oltre che a scrivere l'articolo) di trovare un file obj e cercare di aprirlo per vedere come il modello 3D appariva. Visto che questo argomento è nuovo per me, ho deciso di partire da un file obj contenente una figura molto semplice, il cubo. Per vedere se il file avrebbe rappresentato la figura in modo corretto, ho deciso di visualizzarlo velocemente tramite il 3D software Blender.
+
 
 https://github.com/user-attachments/assets/3ca10ae4-5bdb-4daa-bd36-88e29415e1f0
+
+Il cubo come si può vedere nel video appare all'interno della schermata. Decido di girare la telecamera all'interno dell'applicazione per vedere tutto il modello. Questa è la base per il mio progetto. Dare alla persona/utente che visita il sito la possibilità di visualizzare un modello 3D, non solo dal fronte, ma in tutte le direzioni, una visione a 360 gradi. In seguito deciderò anche di mettere lo zoom, cosa che si puo fare anche in Blender.
 
 ## Design dell’interfraccia e modalià di interazione
 L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stesa cosa vale per il testo. l'oggetto tridimensionale inoltre lo puoi muovere all'interno dello spazio semplicemente cliccandolo. Lo si può ruotare a 360 gradi ed ingrandire e rimpicciole. Per far si che tu possa giocarci come vuoi, l'oggetto lo si può vedere anche sotto il testo, oppure puoi semplicemnte nascondere la parte scritta tramite l'iconcina in alto a sinistra.
