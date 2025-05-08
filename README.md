@@ -1,8 +1,8 @@
 SUPSI 2025  
 Corso d’interaction design, CV429 
-Docenti: A. Gysin, G. Profeta  uuu
+Docenti: A. Gysin, G. Profeta 
 
-Elaborato 1: Me, Myself & AI  
+Elaborato 2: Creazione di un sito Internet con interazioni
 
 # Wawefront Obj File
 Autore: Anastasia Wiesendanger 
@@ -24,9 +24,12 @@ Il cubo come si può vedere nel video appare all'interno della schermata. Decido
 ## Design dell’interfraccia e modalià di interazione
 L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stessa cosa vale per il testo. l'oggetto tridimensionale inoltre lo puoi muovere all'interno dello spazio semplicemente cliccandolo. Lo si può ruotare a 360 gradi ed ingrandire e rimpicciole. Per far si che tu possa giocarci come vuoi, l'oggetto lo si può vedere anche dietro al testo, oppure puoi semplicemente nascondere la parte scritta.
 
+Un'altra interazione interessante, riguarda il riquadro che si trova in basso a destra. Al suo interno vi è presente il codice scritto del obj file. Volendo, lo si può modificare cambiando solo qualche dato o sostituirlo del tutto con qualcos'altro.
 
-<img width="800" alt="aperto" src="https://github.com/user-attachments/assets/cba3b8c4-17dd-48b9-9c31-a3c274787f86" />
 
+<img width="600" alt="aperto" src="https://github.com/user-attachments/assets/08306c6c-52be-4923-aeb8-61063054ede9" />
+
+<img width="600" alt="chiuso" src="https://github.com/user-attachments/assets/6e1997ea-f264-471d-a19c-ee3d31848f11" />
 
 
 ## Tecnologia usata
@@ -52,7 +55,8 @@ f 5 6 2 1
 f 2 6 7 3
 ```
 
-Questo codice rappreseta un modello 3D, più precisamente un cubo
+Questo codice rappreseta un modello 3D, più precisamente un cubo.
+
 
 ```mtl file
 newmtl shinyred
@@ -63,9 +67,7 @@ illum 2
 Ns 100.2235
 ```
 
-Questo invece è il codice presente all'interno di un file mtl e con esso si dovrebbe visualizzare una superficie di tipo metallica
+Questo invece è il codice presente all'interno di un file mtl e specificamente con esso si dovrebbe visualizzare una superficie di tipo metallica.
 
 ## Target e contesto d’uso
 Questo articolo è stato principalmente crearto con l'intenzione di essere mostrato/visto agli studenti che frequentano il Bachelor di Comunicazione Visiva, più specificamente per chi frequenta o vorrà frequentare la classe di Interaction Design. L'articolo in sè ha lo scopo principale di essere una fonte di informazione, di incuriosire, oltre che ha mostrare le varie interazioni che si possono creare al'interno di un file html tramite il codice ed invogliare la gente a restare un po' più a lungo sulla pagina. 
-
-[<img src="doc/aperto.jpg" width="300" alt="Supplemento al dizionario italiano">]()
