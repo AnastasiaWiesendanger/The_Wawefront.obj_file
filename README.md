@@ -22,7 +22,7 @@ https://github.com/user-attachments/assets/3ca10ae4-5bdb-4daa-bd36-88e29415e1f0
 Il cubo come si può vedere nel video appare all'interno della schermata. Decido di girare la telecamera all'interno dell'applicazione per vedere tutto il modello. Questa è la base per il mio progetto. Dare alla persona/utente che visita il sito la possibilità di visualizzare un modello 3D, non solo dal fronte, ma in tutte le direzioni, una visione a 360 gradi. In seguito deciderò anche di mettere lo zoom, cosa che si puo fare anche in Blender.
 
 ## Design dell’interfraccia e modalià di interazione
-L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stessa cosa vale per il testo. l'oggetto tridimensionale inoltre lo puoi muovere all'interno dello spazio semplicemente cliccandolo. Lo si può ruotare a 360 gradi ed ingrandire e rimpicciole. Per far si che tu possa giocarci come vuoi, l'oggetto lo si può vedere anche sotto il testo, oppure puoi semplicemnte nascondere la parte scritta tramite l'iconcina in alto a sinistra.
+L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stessa cosa vale per il testo. l'oggetto tridimensionale inoltre lo puoi muovere all'interno dello spazio semplicemente cliccandolo. Lo si può ruotare a 360 gradi ed ingrandire e rimpicciole. Per far si che tu possa giocarci come vuoi, l'oggetto lo si può vedere anche dietro al testo, oppure puoi semplicemnte nascondere la parte scritta.
 
 [<img src="doc/cards.gif" width="500" alt="Magic trick">]()
 
@@ -66,4 +66,4 @@ Questo invece è il codice presente all'interno di un file mtl e con esso si dov
 ## Target e contesto d’uso
 Questo articolo è stato principalmente crearto con l'intenzione di essere mostrato/visto agli studenti che frequentano il Bachelor di Comunicazione Visiva, più specificamente per chi frequenta o vorrà frequentare la classe di Interaction Design. L'articolo in sè ha lo scopo principale di essere una fonte di informazione, di incuriosire, oltre che ha mostrare le varie interazioni che si possono creare al'interno di un file html tramite il codice ed invogliare la gente a restare un po' più a lungo sulla pagina. 
 
-[<img src="doc/munari.jpg" width="300" alt="Supplemento al dizionario italiano">]()
+[<img src="doc/aperto.jpg" width="300" alt="Supplemento al dizionario italiano">]()
