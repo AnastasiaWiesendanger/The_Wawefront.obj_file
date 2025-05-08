@@ -27,9 +27,9 @@ L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia inf
 Un'altra interazione interessante, riguarda il riquadro che si trova in basso a destra. Al suo interno vi è presente il codice scritto del obj file. Volendo, lo si può modificare cambiando solo qualche dato o sostituirlo del tutto con qualcos'altro.
 
 
-<img width="780" alt="aperto" src="https://github.com/user-attachments/assets/08306c6c-52be-4923-aeb8-61063054ede9" />
+<img width="600" alt="aperto" src="https://github.com/user-attachments/assets/08306c6c-52be-4923-aeb8-61063054ede9" />
 
-<img width="780" alt="chiuso" src="https://github.com/user-attachments/assets/6e1997ea-f264-471d-a19c-ee3d31848f11" />
+<img width="600" alt="chiuso" src="https://github.com/user-attachments/assets/6e1997ea-f264-471d-a19c-ee3d31848f11" />
 
 
 ## Tecnologia usata
