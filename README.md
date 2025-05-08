@@ -30,6 +30,7 @@ L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia inf
 <img width="780" alt="chiuso" src="https://github.com/user-attachments/assets/6e1997ea-f264-471d-a19c-ee3d31848f11" />
 
 
+Un'altra interazione interessante, riguarda il riquadro che si trova in basso a destra. Al suo interno vi è presente il codice scritto del obj file. Volendo, lo si può modificare cambiando solo qualche dato o sostituirlo del tutto con qualcos'altro.
 
 ## Tecnologia usata
 Per questo lavoro, non essendo esperta in codice, specialmente per quanto riguarda la creazione di animazioni interattive, mi sono fatta aiutare da Chat GPT (e un pochino da BLACKBOX.AI). Mentre un sito che è stato di grande aiuto per la creazione dei file obj e mtl è stata la libreria del congresso, ovvero "Library of congress". Oltre che ad esserci una spiegazione dettaglia riguardo l'Obj file ci sono anche presenti dei codici d'esempio al riguardo che ho utilizzato per la creazione di alcune cose presenti nell'articolo:
@@ -54,7 +55,8 @@ f 5 6 2 1
 f 2 6 7 3
 ```
 
-Questo codice rappreseta un modello 3D, più precisamente un cubo
+Questo codice rappreseta un modello 3D, più precisamente un cubo.
+
 
 ```mtl file
 newmtl shinyred
@@ -69,5 +71,3 @@ Questo invece è il codice presente all'interno di un file mtl e con esso si dov
 
 ## Target e contesto d’uso
 Questo articolo è stato principalmente crearto con l'intenzione di essere mostrato/visto agli studenti che frequentano il Bachelor di Comunicazione Visiva, più specificamente per chi frequenta o vorrà frequentare la classe di Interaction Design. L'articolo in sè ha lo scopo principale di essere una fonte di informazione, di incuriosire, oltre che ha mostrare le varie interazioni che si possono creare al'interno di un file html tramite il codice ed invogliare la gente a restare un po' più a lungo sulla pagina. 
-
-[<img src="doc/aperto.jpg" width="300" alt="Supplemento al dizionario italiano">]()
