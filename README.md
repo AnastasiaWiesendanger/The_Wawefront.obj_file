@@ -27,7 +27,7 @@ L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia inf
 
 
 ## Tecnologia usata
-Per questo lavoro, non essendo esperta in codice, specialmente per quanto riguarda la creazione di animazioni interattive, mji sono fatta aiutare da Chat GPT (e un pochino da BLACKBOX.AI). Mentre un sito che è stato di grande aiuto per la creazione dei file obj e mtl è stata la libreria del congresso, ovvero "Library of congress". Oltre che ad esserci una spiegazione dettaglia riguardo l'Obj file ci sono anche presenti dei codici d'esempio al riguardo che ho utilizzato per la creazione di alcune cose presenti nell'articolo:
+Per questo lavoro, non essendo esperta in codice, specialmente per quanto riguarda la creazione di animazioni interattive, mi sono fatta aiutare da Chat GPT (e un pochino da BLACKBOX.AI). Mentre un sito che è stato di grande aiuto per la creazione dei file obj e mtl è stata la libreria del congresso, ovvero "Library of congress". Oltre che ad esserci una spiegazione dettaglia riguardo l'Obj file ci sono anche presenti dei codici d'esempio al riguardo che ho utilizzato per la creazione di alcune cose presenti nell'articolo:
 
 
 ```g Object001
@@ -60,9 +60,9 @@ illum 2
 Ns 100.2235
 ```
 
-Questo invece è il codice presente all'interno di un file mtl e con esso si dovrebbe visualizzare una superficie metallica
+Questo invece è il codice presente all'interno di un file mtl e con esso si dovrebbe visualizzare una superficie di tipo metallica
 
 ## Target e contesto d’uso
-Questo articolo è stato principalmente crearto con l'intenzione di essere mostrato/visto agli studenti che frequentano il Bachelor di Comunicazione Visiva, più specificamente per chi frequenta o vorrà frequentare la classe di Interaction Design. L'articolo in sè ha lo scopo principale di essere una fonte di informazione, oltre che ha mostrare le varie interazioni che si possono creare al'interno di un file html tramite il codice ed anche per invogliare la gente a restare un po' più a lungo sulla pagina. 
+Questo articolo è stato principalmente crearto con l'intenzione di essere mostrato/visto agli studenti che frequentano il Bachelor di Comunicazione Visiva, più specificamente per chi frequenta o vorrà frequentare la classe di Interaction Design. L'articolo in sè ha lo scopo principale di essere una fonte di informazione, di incuriosire, oltre che ha mostrare le varie interazioni che si possono creare al'interno di un file html tramite il codice ed anche per invogliare la gente a restare un po' più a lungo sulla pagina. 
 
 [<img src="doc/munari.jpg" width="300" alt="Supplemento al dizionario italiano">]()
