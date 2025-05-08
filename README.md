@@ -29,7 +29,7 @@ L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia inf
 
 
 
-[<img src="doc/chiuso.jpg" width="300" alt="Supplemento al qualcosadizionario">]()
+[<img src="doc/aperto_2.jpg" width="300" alt="Supplemento al qualcosadizionario">]()
 
 
 
