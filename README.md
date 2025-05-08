@@ -25,9 +25,9 @@ Il cubo come si può vedere nel video appare all'interno della schermata. Decido
 L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stessa cosa vale per il testo. l'oggetto tridimensionale inoltre lo puoi muovere all'interno dello spazio semplicemente cliccandolo. Lo si può ruotare a 360 gradi ed ingrandire e rimpicciole. Per far si che tu possa giocarci come vuoi, l'oggetto lo si può vedere anche dietro al testo, oppure puoi semplicemente nascondere la parte scritta.
 
 
-<img width="790" alt="aperto" src="https://github.com/user-attachments/assets/08306c6c-52be-4923-aeb8-61063054ede9" />
+<img width="780" alt="aperto" src="https://github.com/user-attachments/assets/08306c6c-52be-4923-aeb8-61063054ede9" />
 
-<img width="790" alt="chiuso" src="https://github.com/user-attachments/assets/6e1997ea-f264-471d-a19c-ee3d31848f11" />
+<img width="780" alt="chiuso" src="https://github.com/user-attachments/assets/6e1997ea-f264-471d-a19c-ee3d31848f11" />
 
 
 
