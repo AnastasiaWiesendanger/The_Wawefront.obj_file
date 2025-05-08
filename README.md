@@ -29,10 +29,6 @@ L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia inf
 
 
 
-[<img src="doc/aperto_2.jpg" width="300" alt="Supplemento al qualcosadizionario">]()
-
-
-
 ## Tecnologia usata
 Per questo lavoro, non essendo esperta in codice, specialmente per quanto riguarda la creazione di animazioni interattive, mi sono fatta aiutare da Chat GPT (e un pochino da BLACKBOX.AI). Mentre un sito che è stato di grande aiuto per la creazione dei file obj e mtl è stata la libreria del congresso, ovvero "Library of congress". Oltre che ad esserci una spiegazione dettaglia riguardo l'Obj file ci sono anche presenti dei codici d'esempio al riguardo che ho utilizzato per la creazione di alcune cose presenti nell'articolo:
 
