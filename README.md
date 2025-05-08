@@ -6,7 +6,7 @@ Elaborato 1: Me, Myself & AI
 
 # Wawefront Obj File
 Autore: Anastasia Wiesendanger 
-[Wawefront Obj File](https://ixd-supsi.github.io/2023/esempi/mp_hands/es6/1_landmarks)
+[Wawefront Obj File](https://anastasiawiesendanger.github.io/The_Wawefront.obj_file/)
 
 
 ## Introduzione e tema
