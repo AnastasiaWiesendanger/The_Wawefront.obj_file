@@ -1,6 +1,6 @@
 SUPSI 2025  
 Corso d’interaction design, CV429 
-Docenti: A. Gysin, G. Profeta  
+Docenti: A. Gysin, G. Profeta  uuu
 
 Elaborato 1: Me, Myself & AI  
 
