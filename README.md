@@ -26,7 +26,7 @@ L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia inf
 
 
 [<img src="doc/aperto.jpg" width="300" alt="Supplemento al dizionario italiano">]()
-[<img src="doc/chiuso.jpg" width="300" alt="Supplemento al dizionario italiano">]()
+[<img src="doc/chiuso.jpg" width="300" alt="Supplemento al dizionario">]()
 
 
 ## Tecnologia usata
