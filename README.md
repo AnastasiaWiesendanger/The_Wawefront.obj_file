@@ -1,8 +1,8 @@
 SUPSI 2025  
 Corso d’interaction design, CV429 
-Docenti: A. Gysin, G. Profeta  uuu
+Docenti: A. Gysin, G. Profeta 
 
-Elaborato 1: Me, Myself & AI  
+Elaborato 2: Creazione di un sito Internet con interazioni
 
 # Wawefront Obj File
 Autore: Anastasia Wiesendanger 
@@ -24,13 +24,13 @@ Il cubo come si può vedere nel video appare all'interno della schermata. Decido
 ## Design dell’interfraccia e modalià di interazione
 L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stessa cosa vale per il testo. l'oggetto tridimensionale inoltre lo puoi muovere all'interno dello spazio semplicemente cliccandolo. Lo si può ruotare a 360 gradi ed ingrandire e rimpicciole. Per far si che tu possa giocarci come vuoi, l'oggetto lo si può vedere anche dietro al testo, oppure puoi semplicemente nascondere la parte scritta.
 
+Un'altra interazione interessante, riguarda il riquadro che si trova in basso a destra. Al suo interno vi è presente il codice scritto del obj file. Volendo, lo si può modificare cambiando solo qualche dato o sostituirlo del tutto con qualcos'altro.
+
 
 <img width="780" alt="aperto" src="https://github.com/user-attachments/assets/08306c6c-52be-4923-aeb8-61063054ede9" />
 
 <img width="780" alt="chiuso" src="https://github.com/user-attachments/assets/6e1997ea-f264-471d-a19c-ee3d31848f11" />
 
-#
-Un'altra interazione interessante, riguarda il riquadro che si trova in basso a destra. Al suo interno vi è presente il codice scritto del obj file. Volendo, lo si può modificare cambiando solo qualche dato o sostituirlo del tutto con qualcos'altro.
 
 ## Tecnologia usata
 Per questo lavoro, non essendo esperta in codice, specialmente per quanto riguarda la creazione di animazioni interattive, mi sono fatta aiutare da Chat GPT (e un pochino da BLACKBOX.AI). Mentre un sito che è stato di grande aiuto per la creazione dei file obj e mtl è stata la libreria del congresso, ovvero "Library of congress". Oltre che ad esserci una spiegazione dettaglia riguardo l'Obj file ci sono anche presenti dei codici d'esempio al riguardo che ho utilizzato per la creazione di alcune cose presenti nell'articolo:
