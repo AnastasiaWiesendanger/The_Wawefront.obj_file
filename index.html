@@ -9,7 +9,7 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/OBJLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
   <style>
-    
+
     /* bottone normale */
      #change-light-btn {
     background-color: #6172f4;
@@ -49,13 +49,13 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 35%;
+      width: 30%;
       height: 100%;
       padding: 30px;
       overflow-y: auto;
       background: rgba(0, 0, 0, 0); /* trasparente */
       color: white;
-      z-index: 1;
+      z-index: 100;
       pointer-events: auto;
     }
 
@@ -77,22 +77,11 @@
       background: #6172f4;
     }
   
-  /* Container for the nascondi toggle button */
-  #toggle-container {
-    position: fixed;
-    top: 20px;
-    left: 30px;
-    z-index: 1000;
-  }
-  #toggle-text {
-    color: #6172f4; /* blue color like titles */
-    cursor: pointer;
-    font-weight: bold;
-    user-select: none;
-  }
+  
   .text-panel {
-    margin-top: 20px; /* to avoid overlap with toggle button */
+    margin-top: -30px; 
   }
+
   h1, h2 {
     color: #6172f4;
     margin-bottom: 0.2em;
@@ -120,8 +109,8 @@
 
 #update-obj-btn {
   position: absolute;
-  bottom: 0px;
-  right: 20px;
+  bottom: 18px;
+  right: 0px;
   padding: 6px 12px;
   background-color: #6172f4;
   color: white;
@@ -139,9 +128,12 @@
   position: absolute;
   top: 20px;  /* bottom in basso */
   right: 20px;
-  width: 30%;
+  width: 25%;
+  height: calc(100% - 20px);  /* Sottrai il margine inferiore dall'altezza totale */
+  margin-bottom: 20px;
   z-index: 10;
   font-family: monospace;
+  overflow-y: auto;
 }
 
 #tabs-header {
@@ -167,16 +159,18 @@
 }
 
 #tab-contents {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.6);
   border: 1px solid #6172f4;
   border-top: none;
   border-radius: 0 0 8px 8px;
   overflow: hidden;
+  height: calc(100% - 45px);  /* Sottrai l'altezza del bottone e del margine superiore */
+  overflow-y: auto;
 }
 
 .tab-content {
   width: 100%;
-  height: 400px;
+  height: 100%;
   color: white;
   background: transparent;
   border: none;
@@ -203,15 +197,16 @@
   background-color: #6172f4;
 }
 
+/*per bottone "Aggiorna modello"*/
+.hidden {
+  display: none;
+}
 
-  </style>
+
+ </style>
 </head>
 <body>
   <div id="container"></div>
-
-  <div id="toggle-container">
-    <span id="toggle-text">nascondi</span>
-  </div>
 
   <div class="text-panel">
     <h1>WAWEFRONT.OBJ FILE</h1>
@@ -295,7 +290,11 @@
 
 
   <script>
+    //selezione bottone "Aggiorna modello"
+    const updateButton = document.getElementById('update-obj-btn');
+    updateButton.classList.add('hidden'); //aggiunta classe "nascondi"
    
+    //creazione scenario
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
@@ -417,17 +416,7 @@ document.getElementById('update-obj-btn').addEventListener('click', () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    const toggleText = document.getElementById('toggle-text');
-    const textPanel = document.querySelector('.text-panel');
-    toggleText.addEventListener('click', () => {
-      if (textPanel.style.display === 'none') {
-        textPanel.style.display = 'block';
-        toggleText.textContent = 'nascondi';
-      } else {
-        textPanel.style.display = 'none';
-        toggleText.textContent = 'apri';
-      }
-    });
+  
 
 
     fetch('cube.obj')
@@ -455,7 +444,14 @@ tabButtons.forEach(btn => {
       tab.style.display = (tab.id === targetId) ? 'block' : 'none';
     });
 
-    // ⬇️ Inserisci qui la riga
+    // Mostra o nascondi il bottone in base al tab attivo
+    if (btn.dataset.tab === 'log') {
+      updateButton.classList.remove('hidden'); // Mostra il bottone
+    } else {
+      updateButton.classList.add('hidden'); // Nascondi il bottone
+    }
+
+    // ⬇ Evidenzia link progetti nel tab "note"
     if (btn.dataset.tab === 'note') highlightObjLinks(); 
   });
 });
@@ -505,6 +501,7 @@ fileList.forEach(file => {
 
 document.getElementById('tab-note').innerHTML = noteContent;
 highlightObjLinks();
+
        
 
   </script>
