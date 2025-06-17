@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visualizzatore OBJ con Testo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Adelle+Sans+Devanagari&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/OBJLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+  <style>
+
+    /* bottone normale */
+     #change-light-btn {
+    background-color: #6172f4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Menlo', monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* bottone click */
+  #change-light-btn:active {
+    background-color: white;
+    color: #6172f4;
+  }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      font-family: 'Menlo', monospace;
+    }
+
+    #container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .text-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30%;
+      height: 100%;
+      padding: 30px;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0); /* trasparente */
+      color: white;
+      z-index: 100;
+      pointer-events: auto;
+    }
+
+    h1, h2 {
+      color: #6172f4;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+
+
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 0px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #6172f4;
+    }
+  
+  
+  .text-panel {
+    margin-top: -30px; 
+  }
+
+  h1, h2 {
+    color: #6172f4;
+    margin-bottom: 0.2em;
+  }
+
+
+  #obj-text-box {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 12px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  z-index: 10;
+  border: 1px solid #6172f4;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+#update-obj-btn {
+  position: absolute;
+  bottom: 18px;
+  right: 0px;
+  padding: 6px 12px;
+  background-color: #6172f4;
+  color: white;
+  border: none;
+  font-size: 12px;
+  font-family: 'Menlo', monospace;
+  cursor: pointer;
+  z-index: 11;
+  border-radius: 0px;
+}
+
+
+/* questo è i mini menù, I think */
+#text-tabs {
+  position: absolute;
+  top: 20px;  /* bottom in basso */
+  right: 20px;
+  width: 25%;
+  height: calc(100% - 20px);  /* Sottrai il margine inferiore dall'altezza totale */
+  margin-bottom: 20px;
+  z-index: 10;
+  font-family: monospace;
+  overflow-y: auto;
+}
+
+#tabs-header {
+  display: flex;
+  background: #222;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 6px;
+  background: #333;
+  border: none;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #6172f4;
+  font-weight: bold;
+}
+
+#tab-contents {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #6172f4;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  height: calc(100% - 45px);  /* Sottrai l'altezza del bottone e del margine superiore */
+  overflow-y: auto;
+}
+
+.tab-content {
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: transparent;
+  border: none;
+  padding: 10px;
+  resize: vertical;
+  box-sizing: border-box;
+  font-size: 12px;
+  /*white-space: pre; || spazio orizz. no confini*/
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  outline: none;
+}
+
+ /*cose in Note*/
+.obj-link {
+  color: white;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.obj-link:hover {
+  background-color: #6172f4;
+}
+
+/*per bottone "Aggiorna modello"*/
+.hidden {
+  display: none;
+}
+
+
+ </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <div class="text-panel">
+    <h1>WAWEFRONT.OBJ FILE</h1>
+    <h2>Introduzione</h2>
+    <p>I file OBJ (o Wavefront .obj file) sono un formato aperto di tipo testuale, creato dalla società Wavefront Technologies, azienda che successivamente divenne Alias|Wavefront dopo l'acquisizione da parte di Silicon Graphics e la fusione con Alias Research. Inizialmente, il formato OBJ era stato ideato per il software di grafica 3D The Advanced Visualizer (TAV).</p>
+    <br>
+    <h2>Storia</h2>
+    <p>I file OBJ furono sviluppati nel 1984 da Wavefront Technologies, azienda che successivamente divenne Alias|Wavefront dopo l'acquisizione da parte di Silicon Graphics e la fusione con Alias Research. Inizialmente, il formato OBJ era stato ideato per il software di grafica 3D The Advanced Visualizer (TAV).</p>
+    <br>
+    <h2>The Advanced Visualizer</h2>
+    <p>The Advanced Visualizer (TAV) era il prodotto di punta di Wavefront Technologies  e acquisì una certa notorietà tra la metà degli anni ’80 e la fine degli anni ’90.</p>
+    <p>A differenza di molti software di grafica e animazione odierni, TAV non era un unico programma, ma una raccolta di strumenti indipendenti, ciascuno dedicato a un aspetto specifico della sintesi delle immagini. Questa suite si basava sullo scambio di file in formato ASCII (American Standard Code for Information Interchange), tra cui proprio il formato OBJ.</p>
+    <br>
+    <h2>Struttura di un file OBJ</h2>
+    <p>Oltre a essere un formato testuale, quindi leggibile e modificabile con un semplice editor di testo, i file OBJ descrivono i modelli 3D memorizzando informazioni relative alla loro geometria, tra cui:<br></p>
+    <p> • Vertici (coordinate dei punti nello spazio 3D);<br>
+        • Facce (poligoni che definiscono la superficie del modello);<br>
+        • Normali (vettori che indicano la direzione delle superfici);<br>
+        • Coordinate UV (utilizzate per il mapping delle texture).<br></p>
+    <p>Grazie a questi dati, si generano mesh, ovvero oggetti poliedrici composti da una rete di facce poligonali (solitamente triangolari o quadrate). Le facce si collegano tramite linee (vettori) e vertici, formando gli spigoli del modello 3D.</p>
+    <div id="canvas-container"></div>
+     
+    <p>In termini semplici, i file OBJ servono a descrivere la forma di un modello 3D. Tuttavia, spesso vengono accompagnati da un file MTL (Material Template Library), che contiene informazioni relative agli aspetti estetici del modello, come:<br></p>
+    <p>• Colore (valori RGB);<br>
+       • Riflessività (interazione del materiale con la luce);<br>
+       • Mappatura delle texture (applicazione d'immagini 2D sulla superficie di un modello 3D).<br>
+    </p>
+    <button id="change-light-btn">Esempio</button>
+    <br><br>
+    <h2>Software che supportano i file OBJ</h2>
+    <p>I file OBJ sono ampiamente riconosciuti grazie alla loro semplicità e la capacità di gestire grandi quantità di dati. Numerosi software supportano questo formato, tra cui:<br>
+    <p> • Software di modellazione 3D: Adobe Substance, Blender, Maya, 3ds Max;<br>
+        • Software di rendering e animazione: Adobe After Effects, KeyShot, Cinema 4D.  </p> 
+    </p>
+    <p>Se un software non supporta direttamente i file OBJ, esistono strumenti come MeshLab e Spin 3D Mesh Converter che permettono di convertirli in altri formati.</p>
+    <h2>Licenze e brevetti</h2>
+    <p>Uno dei motivi per cui il formato OBJ è così diffuso è che si tratta di un file aperto, liberamente utilizzabile senza restrizioni di copyright.</p>
+    <p>Sebbene non vi sia mai stata una dichiarazione ufficiale da parte di Wavefront Technologies (o delle aziende che l’hanno acquisita) che garantisse l'uso del formato senza licenza, la documentazione originale includeva una nota informale: “L'appendice .obj è destinata a chi desidera utilizzare il formato OBJ per tradurre dati geometrici da altre applicazioni ai prodotti Wavefront. Fornisce inoltre informazioni per gli utenti di Advanced Visualizer che necessitano di dettagli sul formato .obj di Wavefront.”</p>
+    <p>Grazie alla sua accessibilità e versatilità, il formato OBJ continua a essere uno standard fondamentale nell’industria della grafica 3D.</p>
+    <h2>I links</h2>
+    <p>https://it.wikipedia.org/wiki/Formato_Wavefront_.OBJ<br>
+        https://en.wikipedia.org/wiki/Wavefront_.obj_file<br>
+        https://en.wikipedia.org/wiki/The_Advanced_Visualizer <br>
+        https://en.wikipedia.org/wiki/Vertex_(geometry) <br>
+        https://it.wikipedia.org/wiki/Vertice_(geometria)<br>
+        https://it.wikipedia.org/wiki/Poligono<br>
+        https://it.wikipedia.org/wiki/Poliedro<br>
+        https://en.wikipedia.org/wiki/Polyhedron <br>
+        https://it.wikipedia.org/wiki/Mappatura_UV<br>
+        https://en.wikipedia.org/wiki/UV_mapping <br>
+        https://www.adobe.com/it/products/substance3d/discover/what-are-obj-files.html<br>
+        https://all3dp.com/2/obj-file-format-simply-explained/#google_vignette<br>
+        https://www.pcmag.com/encyclopedia/term/ascii-file<br>
+        https://kb.blackbaud.com/knowledgebase/Article/48776<br>
+        https://www.loc.gov/preservation/digital/formats/fdd/fdd000508.shtml<br>
+        https://www.loc.gov/preservation/digital/formats/fdd/fdd000507.shtml#factors<br>
+        https://www.adobe.com/ch_it/products/substance3d/discover/how-to-create-3d-textures.html<br>
+    </p>
+  </div>
+
+<div id="text-tabs">
+  <div id="tabs-header">
+    <button class="tab-btn active" data-tab="obj">OBJ</button>
+    <button class="tab-btn" data-tab="note">Note</button>
+    <button class="tab-btn" data-tab="log">Log</button>
+  </div>
+
+  <div id="tab-contents">
+    <textarea id="tab-obj" class="tab-content" spellcheck="false" readonly></textarea>
+    <textarea id="tab-log" class="tab-content" spellcheck="false" style="display: none;"></textarea>
+    <div id="tab-note" class="tab-content" contenteditable="true" style="display: none;">
+      <p><span class="obj-link" data-obj="teapot.obj">teapot.obj</span></p><br>
+      <p><span class="obj-link" data-obj="cube.obj">cube.obj</span></p><br>
+      <p><span class="obj-link" data-obj="standford_bunny.obj">scaled_standford_bunny_2.obj</span></p>
+    </div>
+  </div>
+
+  <button id="update-obj-btn">Aggiorna modello</button>
+  <div id="obj-status-msg"></div>
+</div>
+
+
+  <script>
+    //selezione bottone "Aggiorna modello"
+    const updateButton = document.getElementById('update-obj-btn');
+    updateButton.classList.add('hidden'); //aggiunta classe "nascondi"
+   
+    //creazione scenario
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.getElementById('container').appendChild(renderer.domElement);
+
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(1, 1, 1).normalize();
+    scene.add(light);
+
+    const light2 = new THREE.DirectionalLight(0xffffff, 1);
+    light2.position.set(-1, -1, -1).normalize();
+    scene.add(light2);
+
+    let currentLights = 'default';
+
+    function setupDefaultLighting() {
+    light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(1, 1, 1).normalize();
+    scene.add(light);
+
+    light2 = new THREE.DirectionalLight(0xffffff, 1);
+    light2.position.set(-1, -1, -1).normalize();
+    scene.add(light2);
+  }
+
+  function removeAllLights() {
+    scene.remove(light);
+    scene.remove(light2);
+  }
+
+  function setupTextureLighting() {
+    const textureLight = new THREE.PointLight(0x3E4FA1, 1.5);
+    textureLight.position.set(2, 3, 4);
+    scene.add(textureLight);
+
+    const ambient = new THREE.AmbientLight(0x404040); // luce soffusa
+    scene.add(ambient);
+  }
+
+  document.getElementById('change-light-btn').addEventListener('click', () => {
+    if (currentLights === 'default') {
+      removeAllLights();
+      setupTextureLighting();
+      currentLights = 'texture';
+    }
+  });
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.1;
+
+    const loader = new THREE.OBJLoader();
+    let currentObjMesh = null;
+
+// Carica il file obj
+fetch('cube.obj')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('tab-obj').value = data;
+    loadObjFromText(data);
+  });
+
+  fetch('gioca.obj')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('tab-log').value = data;
+  })
+  .catch(error => {
+    console.error('Errore nel caricamento di gioca.obj:', error);
+  });
+
+
+// Funzione per caricare un oggetto OBJ dalla stringa
+function loadObjFromText(text) {
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const loader = new THREE.OBJLoader();
+  loader.load(url, (obj) => {
+    // Rimuovi il vecchio oggetto se presente
+    if (currentObjMesh) {
+      scene.remove(currentObjMesh);
+    }
+    currentObjMesh = obj;
+    currentObjMesh.position.set(0, 0, 0);
+    scene.add(currentObjMesh);
+    URL.revokeObjectURL(url);
+  }, undefined, (err) => {
+    alert("Errore nel caricamento del modello: verifica la sintassi del file OBJ.");
+    console.error(err);
+  });
+}
+
+// Quando clicchi "Aggiorna modello"
+document.getElementById('update-obj-btn').addEventListener('click', () => {
+  const newText = document.getElementById('tab-log').value;
+
+  // Aggiorna modello 3D
+  loadObjFromText(newText);
+
+  // Aggiorna tab OBJ (in sola lettura)
+  document.getElementById('tab-obj').value = newText;
+});
+
+     
+    camera.position.set(-6, 4, 4);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+  
+
+
+    fetch('cube.obj')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('obj-text-box').textContent = data;
+  })
+  .catch(error => {
+    console.error('Errore nel caricamento del file OBJ:', error);
+    document.getElementById('obj-text-box').textContent = 'Impossibile caricare il file OBJ.';
+  });
+
+
+ // Questo è per il tab in fondo a destra
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const targetId = 'tab-' + btn.dataset.tab;
+    tabContents.forEach(tab => {
+      tab.style.display = (tab.id === targetId) ? 'block' : 'none';
+    });
+
+    // Mostra o nascondi il bottone in base al tab attivo
+    if (btn.dataset.tab === 'log') {
+      updateButton.classList.remove('hidden'); // Mostra il bottone
+    } else {
+      updateButton.classList.add('hidden'); // Nascondi il bottone
+    }
+
+    // ⬇ Evidenzia link progetti nel tab "note"
+    if (btn.dataset.tab === 'note') highlightObjLinks(); 
+  });
+});
+
+
+// trasforma link in tempo reale
+//document.getElementById('tab-note').addEventListener('input', () => {
+ //highlightObjLinks();
+//});
+
+function highlightObjLinks() {
+  const noteTab = document.getElementById('tab-note');
+  const links = noteTab.querySelectorAll('.obj-link');
+  links.forEach(link => {
+    link.addEventListener('mouseover', () => {
+      link.style.backgroundColor = 'blue';
+      link.style.color = 'white';
+      link.style.cursor = 'pointer';
+    });
+    link.addEventListener('mouseout', () => {
+      link.style.backgroundColor = '';
+      link.style.color = '';
+    });
+    link.addEventListener('click', () => {
+      const filename = link.dataset.obj;
+      fetch(filename)
+        .then(response => response.text())
+        .then(text => {
+          // Mostra contenuto .obj nella tab OBJ
+          document.getElementById('tab-obj').value = text;
+          // Carica il nuovo modello nella scena 3D
+          loadObjFromText(text); // Cambia qui per caricare il modello dal testo
+        })
+        .catch(error => {
+          console.error('Errore nel caricamento del file OBJ:', error);
+        });
+    });
+  });
+}
+
+const fileList = ["teapot.obj", "standford_bunny.obj","cube.obj"];
+let noteContent = "Clicca per caricare un modello OBJ:<br>";
+
+fileList.forEach(file => {
+  noteContent += `- <span class="obj-link" data-obj="${file}">${file}</span><br>`;
+});
+
+document.getElementById('tab-note').innerHTML = noteContent;
+highlightObjLinks();
+
+       
+
+  </script>
+</body>
+</html>
