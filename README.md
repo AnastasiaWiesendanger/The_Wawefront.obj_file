@@ -30,6 +30,10 @@ Un'altra interazione interessante, riguarda il riquadro che si trova a destra. V
 [<img src="doc/two.jpg" width="800" alt="two">]() 
 [<img src="doc/three.jpg" width="800" alt="three">]()
 
+<img width="600" alt="one" src="https://github.com/user-attachments/assets/08306c6c-52be-4923-aeb8-61063054ede9" />
+
+<img width="600" alt="two" src="https://github.com/user-attachments/assets/6e1997ea-f264-471d-a19c-ee3d31848f11" />
+
 
 ## Tecnologia usata
 Per questo lavoro, non essendo esperta in codice, specialmente per quanto riguarda la creazione di animazioni interattive, mi sono fatta aiutare da Chat GPT (e un pochino da BLACKBOX.AI). Mentre un sito che è stato di grande aiuto per la creazione dei file obj e mtl è stata la libreria del congresso, ovvero "Library of congress". Oltre che ad esserci una spiegazione dettaglia riguardo l'Obj file ci sono anche presenti dei codici d'esempio al riguardo che ho utilizzato per la creazione di alcune cose presenti nell'articolo:
