@@ -9,7 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/OBJLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
   <style>
-
     /* bottone normale */
      #change-light-btn {
     background-color: #6172f4;
@@ -68,7 +67,6 @@
       margin-bottom: 15px;
     }
 
-
     ::-webkit-scrollbar {
       width: 4px;
       height: 0px;
@@ -76,7 +74,6 @@
     ::-webkit-scrollbar-thumb {
       background: #6172f4;
     }
-  
   
   .text-panel {
     margin-top: -30px; 
@@ -86,7 +83,6 @@
     color: #6172f4;
     margin-bottom: 0.2em;
   }
-
 
   #obj-text-box {
   position: absolute;
@@ -122,7 +118,6 @@
   border-radius: 0px;
 }
 
-
 /* questo è i mini menù, I think */
 #text-tabs {
   position: absolute;
@@ -156,6 +151,25 @@
 .tab-btn.active {
   background: #6172f4;
   font-weight: bold;
+}
+
+#download-obj-btn {
+  position: absolute;
+  bottom: 18px;
+  right: 100px; /* Positioned left of the update button */
+  padding: 6px 12px;
+  background-color: #6172f4;
+  color: white;
+  border: none;
+  font-size: 12px;
+  font-family: 'Menlo', monospace;
+  cursor: pointer;
+  z-index: 11;
+  border-radius: 0px;
+}
+
+#download-obj-btn:hover {
+  background-color: #4a5bd4;
 }
 
 #tab-contents {
@@ -202,7 +216,37 @@
   display: none;
 }
 
+/* NEW STYLES FOR HIGHLIGHTING */
+.vertex-line {
+  transition: background-color 0.2s;
+}
+  
+.face-line {
+  transition: background-color 0.2s;
+}
+  
+.vertex-line:hover, .face-line:hover {
+  background-color: yellow;
+  color: black;
+  cursor: pointer;
+}
 
+.vertex-marker {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: yellow;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 100;
+  display: none;
+}
+
+.face-highlight {
+  position: absolute;
+  z-index: 99;
+}
  </style>
 </head>
 <body>
@@ -217,7 +261,7 @@
     <p>I file OBJ furono sviluppati nel 1984 da Wavefront Technologies, azienda che successivamente divenne Alias|Wavefront dopo l'acquisizione da parte di Silicon Graphics e la fusione con Alias Research. Inizialmente, il formato OBJ era stato ideato per il software di grafica 3D The Advanced Visualizer (TAV).</p>
     <br>
     <h2>The Advanced Visualizer</h2>
-    <p>The Advanced Visualizer (TAV) era il prodotto di punta di Wavefront Technologies  e acquisì una certa notorietà tra la metà degli anni ’80 e la fine degli anni ’90.</p>
+    <p>The Advanced Visualizer (TAV) era il prodotto di punta di Wavefront Technologies  e acquisì una certa notorietà tra la metà degli anni '80 e la fine degli anni '90.</p>
     <p>A differenza di molti software di grafica e animazione odierni, TAV non era un unico programma, ma una raccolta di strumenti indipendenti, ciascuno dedicato a un aspetto specifico della sintesi delle immagini. Questa suite si basava sullo scambio di file in formato ASCII (American Standard Code for Information Interchange), tra cui proprio il formato OBJ.</p>
     <br>
     <h2>Struttura di un file OBJ</h2>
@@ -244,8 +288,8 @@
     <p>Se un software non supporta direttamente i file OBJ, esistono strumenti come MeshLab e Spin 3D Mesh Converter che permettono di convertirli in altri formati.</p>
     <h2>Licenze e brevetti</h2>
     <p>Uno dei motivi per cui il formato OBJ è così diffuso è che si tratta di un file aperto, liberamente utilizzabile senza restrizioni di copyright.</p>
-    <p>Sebbene non vi sia mai stata una dichiarazione ufficiale da parte di Wavefront Technologies (o delle aziende che l’hanno acquisita) che garantisse l'uso del formato senza licenza, la documentazione originale includeva una nota informale: “L'appendice .obj è destinata a chi desidera utilizzare il formato OBJ per tradurre dati geometrici da altre applicazioni ai prodotti Wavefront. Fornisce inoltre informazioni per gli utenti di Advanced Visualizer che necessitano di dettagli sul formato .obj di Wavefront.”</p>
-    <p>Grazie alla sua accessibilità e versatilità, il formato OBJ continua a essere uno standard fondamentale nell’industria della grafica 3D.</p>
+    <p>Sebbene non vi sia mai stata una dichiarazione ufficiale da parte di Wavefront Technologies (o delle aziende che l'hanno acquisita) che garantisse l'uso del formato senza licenza, la documentazione originale includeva una nota informale: "L'appendice .obj è destinata a chi desidera utilizzare il formato OBJ per tradurre dati geometrici da altre applicazioni ai prodotti Wavefront. Fornisce inoltre informazioni per gli utenti di Advanced Visualizer che necessitano di dettagli sul formato .obj di Wavefront."</p>
+    <p>Grazie alla sua accessibilità e versatilità, il formato OBJ continua a essere uno standard fondamentale nell'industria della grafica 3D.</p>
     <h2>I links</h2>
     <p>https://it.wikipedia.org/wiki/Formato_Wavefront_.OBJ<br>
         https://en.wikipedia.org/wiki/Wavefront_.obj_file<br>
@@ -275,7 +319,7 @@
   </div>
 
   <div id="tab-contents">
-    <textarea id="tab-obj" class="tab-content" spellcheck="false" readonly></textarea>
+    <div id="tab-obj" class="tab-content" spellcheck="false"></div>
     <textarea id="tab-log" class="tab-content" spellcheck="false" style="display: none;"></textarea>
     <div id="tab-note" class="tab-content" contenteditable="true" style="display: none;">
       <p><span class="obj-link" data-obj="teapot.obj">teapot.obj</span></p><br>
@@ -283,16 +327,41 @@
       <p><span class="obj-link" data-obj="standford_bunny.obj">scaled_standford_bunny_2.obj</span></p>
     </div>
   </div>
-
+  
+  <button id="download-obj-btn">Scarica OBJ</button>
   <button id="update-obj-btn">Aggiorna modello</button>
   <div id="obj-status-msg"></div>
 </div>
 
 
   <script>
+    // Global variables for highlighting
+    let vertexMarkers = [];
+    let highlightedFaces = [];
+    let originalMaterials = new WeakMap();
+    let currentHoveredElement = null;
+    
     //selezione bottone "Aggiorna modello"
     const updateButton = document.getElementById('update-obj-btn');
     updateButton.classList.add('hidden'); //aggiunta classe "nascondi"
+    
+    //selezione bottone "download modello"
+    const downloadButton = document.getElementById('download-obj-btn');
+
+    downloadButton.addEventListener('click', () => {
+    const objContent = document.getElementById('tab-obj').textContent;
+    downloadFile('model.obj', objContent);
+    });
+
+function downloadFile(filename, text) {
+  const element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
    
     //creazione scenario
     const scene = new THREE.Scene();
@@ -301,47 +370,47 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('container').appendChild(renderer.domElement);
 
-    const light = new THREE.DirectionalLight(0xffffff, 1);
+    let light = new THREE.DirectionalLight(0xffffff, 1);
     light.position.set(1, 1, 1).normalize();
     scene.add(light);
 
-    const light2 = new THREE.DirectionalLight(0xffffff, 1);
+    let light2 = new THREE.DirectionalLight(0xffffff, 1);
     light2.position.set(-1, -1, -1).normalize();
     scene.add(light2);
 
     let currentLights = 'default';
 
     function setupDefaultLighting() {
-    light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, 1, 1).normalize();
-    scene.add(light);
+      light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.set(1, 1, 1).normalize();
+      scene.add(light);
 
-    light2 = new THREE.DirectionalLight(0xffffff, 1);
-    light2.position.set(-1, -1, -1).normalize();
-    scene.add(light2);
-  }
-
-  function removeAllLights() {
-    scene.remove(light);
-    scene.remove(light2);
-  }
-
-  function setupTextureLighting() {
-    const textureLight = new THREE.PointLight(0x3E4FA1, 1.5);
-    textureLight.position.set(2, 3, 4);
-    scene.add(textureLight);
-
-    const ambient = new THREE.AmbientLight(0x404040); // luce soffusa
-    scene.add(ambient);
-  }
-
-  document.getElementById('change-light-btn').addEventListener('click', () => {
-    if (currentLights === 'default') {
-      removeAllLights();
-      setupTextureLighting();
-      currentLights = 'texture';
+      light2 = new THREE.DirectionalLight(0xffffff, 1);
+      light2.position.set(-1, -1, -1).normalize();
+      scene.add(light2);
     }
-  });
+
+    function removeAllLights() {
+      scene.remove(light);
+      scene.remove(light2);
+    }
+
+    function setupTextureLighting() {
+      const textureLight = new THREE.PointLight(0x3E4FA1, 1.5);
+      textureLight.position.set(2, 3, 4);
+      scene.add(textureLight);
+
+      const ambient = new THREE.AmbientLight(0x404040); // luce soffusa
+      scene.add(ambient);
+    }
+
+    document.getElementById('change-light-btn').addEventListener('click', () => {
+      if (currentLights === 'default') {
+        removeAllLights();
+        setupTextureLighting();
+        currentLights = 'texture';
+      }
+    });
 
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
@@ -350,63 +419,213 @@
     const loader = new THREE.OBJLoader();
     let currentObjMesh = null;
 
-// Carica il file obj
-fetch('cube.obj')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('tab-obj').value = data;
-    loadObjFromText(data);
-  });
+    // Carica il file obj
+    fetch('cube.obj')
+      .then(response => response.text())
+      .then(data => {
+        displayObjText(data);
+        loadObjFromText(data);
+      });
 
-  fetch('gioca.obj')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('tab-log').value = data;
-  })
-  .catch(error => {
-    console.error('Errore nel caricamento di gioca.obj:', error);
-  });
+    fetch('gioca.obj')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('tab-log').value = data;
+      })
+      .catch(error => {
+        console.error('Errore nel caricamento di gioca.obj:', error);
+      });
 
-
-// Funzione per caricare un oggetto OBJ dalla stringa
-function loadObjFromText(text) {
-  const blob = new Blob([text], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const loader = new THREE.OBJLoader();
-  loader.load(url, (obj) => {
-    // Rimuovi il vecchio oggetto se presente
-    if (currentObjMesh) {
-      scene.remove(currentObjMesh);
+    // Funzione per visualizzare il testo OBJ con evidenziazione
+    function displayObjText(text) {
+      const objContainer = document.getElementById('tab-obj');
+      objContainer.innerHTML = ''; // Clear previous content
+      
+      const lines = text.split('\n');
+      lines.forEach((line, index) => {
+        if (line.startsWith('v ')) {
+          const vertexLine = document.createElement('div');
+          vertexLine.className = 'vertex-line';
+          vertexLine.textContent = line;
+          vertexLine.dataset.index = index;
+          vertexLine.addEventListener('mouseover', () => highlightVertex(line));
+          vertexLine.addEventListener('mouseout', unhighlightAll);
+          objContainer.appendChild(vertexLine);
+        } else if (line.startsWith('f ')) {
+          const faceLine = document.createElement('div');
+          faceLine.className = 'face-line';
+          faceLine.textContent = line;
+          faceLine.dataset.index = index;
+          faceLine.addEventListener('mouseover', () => highlightFace(line));
+          faceLine.addEventListener('mouseout', unhighlightAll);
+          objContainer.appendChild(faceLine);
+        } else {
+          const regularLine = document.createElement('div');
+          regularLine.textContent = line;
+          objContainer.appendChild(regularLine);
+        }
+      });
     }
-    currentObjMesh = obj;
-    currentObjMesh.position.set(0, 0, 0);
-    scene.add(currentObjMesh);
-    URL.revokeObjectURL(url);
-  }, undefined, (err) => {
-    alert("Errore nel caricamento del modello: verifica la sintassi del file OBJ.");
-    console.error(err);
-  });
-}
 
-// Quando clicchi "Aggiorna modello"
-document.getElementById('update-obj-btn').addEventListener('click', () => {
-  const newText = document.getElementById('tab-log').value;
+    // Funzione per caricare un oggetto OBJ dalla stringa
+    function loadObjFromText(text) {
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const loader = new THREE.OBJLoader();
+      
+      loader.load(url, (obj) => {
+        // Rimuovi il vecchio oggetto se presente
+        if (currentObjMesh) {
+          scene.remove(currentObjMesh);
+          // Clean up previous markers
+          vertexMarkers.forEach(marker => document.body.removeChild(marker));
+          vertexMarkers = [];
+        }
+        
+        currentObjMesh = obj;
+        currentObjMesh.position.set(0, 0, 0);
+        scene.add(currentObjMesh);
+        
+        // Store original materials for face highlighting
+        currentObjMesh.traverse(child => {
+          if (child.isMesh) {
+            originalMaterials.set(child, child.material);
+          }
+        });
+        
+        URL.revokeObjectURL(url);
+      }, undefined, (err) => {
+        alert("Errore nel caricamento del modello: verifica la sintassi del file OBJ.");
+        console.error(err);
+      });
+    }
 
-  // Aggiorna modello 3D
-  loadObjFromText(newText);
+    // Quando clicchi "Aggiorna modello"
+    document.getElementById('update-obj-btn').addEventListener('click', () => {
+      const newText = document.getElementById('tab-log').value;
 
-  // Aggiorna tab OBJ (in sola lettura)
-  document.getElementById('tab-obj').value = newText;
-});
+      // Aggiorna modello 3D
+      loadObjFromText(newText);
 
-     
+      // Aggiorna tab OBJ
+      displayObjText(newText);
+    });
+         
     camera.position.set(-6, 4, 4);
+
+    // Highlight a vertex in the 3D view
+    function highlightVertex(line) {
+      // Parse vertex coordinates
+      const parts = line.trim().split(/\s+/);
+      const x = parseFloat(parts[1]);
+      const y = parseFloat(parts[2]);
+      const z = parseFloat(parts[3]);
+      
+      // Convert 3D coordinates to screen position
+      const vector = new THREE.Vector3(x, y, z);
+      vector.project(camera);
+      
+      const xPos = (vector.x * 0.5 + 0.5) * window.innerWidth;
+      const yPos = (-(vector.y * 0.5) + 0.5) * window.innerHeight;
+      
+      // Create or update marker
+      let marker = vertexMarkers.find(m => m.dataset.line === line);
+      if (!marker) {
+        marker = document.createElement('div');
+        marker.className = 'vertex-marker';
+        marker.dataset.line = line;
+        document.body.appendChild(marker);
+        vertexMarkers.push(marker);
+      }
+      
+      marker.style.left = `${xPos}px`;
+      marker.style.top = `${yPos}px`;
+      marker.style.display = 'block';
+    }
+
+    // Highlight a face in the 3D view
+    function highlightFace(line) {
+      if (!currentObjMesh) return;
+      
+      // Parse face indices (OBJ indices start at 1)
+      const parts = line.trim().split(/\s+/);
+      const indices = parts.slice(1).map(p => parseInt(p.split('/')[0]) - 1);
+      
+      // Highlight the face in the 3D model
+      currentObjMesh.traverse(child => {
+        if (child.isMesh && child.geometry) {
+          // Create a copy of the geometry with just this face
+          const tempGeo = new THREE.BufferGeometry();
+          
+          // Get original position attribute
+          const posAttr = child.geometry.attributes.position;
+          const positions = posAttr.array;
+          
+          // Create new arrays for just this face
+          const newPositions = new Float32Array(9); // 3 vertices * 3 components
+          for (let i = 0; i < 3; i++) {
+            const idx = indices[i] * 3;
+            newPositions[i*3] = positions[idx];
+            newPositions[i*3+1] = positions[idx+1];
+            newPositions[i*3+2] = positions[idx+2];
+          }
+          
+          tempGeo.setAttribute('position', new THREE.BufferAttribute(newPositions, 3));
+          tempGeo.setIndex([0, 1, 2]);
+          
+          // Create highlighted material
+          const highlightMat = new THREE.MeshBasicMaterial({
+            color: 0xffff00,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.7
+          });
+          
+          // Store original material if not already stored
+          if (!originalMaterials.has(child)) {
+            originalMaterials.set(child, child.material);
+          }
+          
+          // Create highlight mesh
+          const highlightMesh = new THREE.Mesh(tempGeo, highlightMat);
+          highlightMesh.position.copy(child.position);
+          highlightMesh.rotation.copy(child.rotation);
+          highlightMesh.scale.copy(child.scale);
+          scene.add(highlightMesh);
+          highlightedFaces.push(highlightMesh);
+        }
+      });
+    }
+
+    // Remove all highlights
+    function unhighlightAll() {
+      // Remove vertex markers
+      vertexMarkers.forEach(marker => {
+        marker.style.display = 'none';
+      });
+      
+      // Remove face highlights
+      highlightedFaces.forEach(mesh => {
+        scene.remove(mesh);
+        mesh.geometry.dispose();
+        mesh.material.dispose();
+      });
+      highlightedFaces = [];
+      
+      // Restore original materials
+      if (currentObjMesh) {
+        currentObjMesh.traverse(child => {
+          if (child.isMesh && originalMaterials.has(child)) {
+            child.material = originalMaterials.get(child);
+          }
+        });
+      }
+    }
 
     function animate() {
       requestAnimationFrame(animate);
       controls.update();
       renderer.render(scene, camera);
-
     }
     animate();
 
@@ -416,94 +635,83 @@ document.getElementById('update-obj-btn').addEventListener('click', () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-  
-
-
     fetch('cube.obj')
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById('obj-text-box').textContent = data;
-  })
-  .catch(error => {
-    console.error('Errore nel caricamento del file OBJ:', error);
-    document.getElementById('obj-text-box').textContent = 'Impossibile caricare il file OBJ.';
-  });
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('obj-text-box').textContent = data;
+      })
+      .catch(error => {
+        console.error('Errore nel caricamento del file OBJ:', error);
+        document.getElementById('obj-text-box').textContent = 'Impossibile caricare il file OBJ.';
+      });
 
+    // Questo è per il tab in fondo a destra
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
 
- // Questo è per il tab in fondo a destra
-const tabButtons = document.querySelectorAll('.tab-btn');
-const tabContents = document.querySelectorAll('.tab-content');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-tabButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+        const targetId = 'tab-' + btn.dataset.tab;
+        tabContents.forEach(tab => {
+          tab.style.display = (tab.id === targetId) ? 'block' : 'none';
+        });
 
-    const targetId = 'tab-' + btn.dataset.tab;
-    tabContents.forEach(tab => {
-      tab.style.display = (tab.id === targetId) ? 'block' : 'none';
-    });
-
-    // Mostra o nascondi il bottone in base al tab attivo
-    if (btn.dataset.tab === 'log') {
-      updateButton.classList.remove('hidden'); // Mostra il bottone
+        // Mostra o nascondi il bottone in base al tab attivo
+        if (btn.dataset.tab === 'obj') {
+      downloadButton.classList.remove('hidden');
+      updateButton.classList.add('hidden');
+    } else if (btn.dataset.tab === 'log') {
+      updateButton.classList.remove('hidden');
+      downloadButton.classList.add('hidden');
     } else {
-      updateButton.classList.add('hidden'); // Nascondi il bottone
+      updateButton.classList.add('hidden');
+      downloadButton.classList.add('hidden');
+    }
+  });
+});
+
+    function highlightObjLinks() {
+      const noteTab = document.getElementById('tab-note');
+      const links = noteTab.querySelectorAll('.obj-link');
+      links.forEach(link => {
+        link.addEventListener('mouseover', () => {
+          link.style.backgroundColor = 'blue';
+          link.style.color = 'white';
+          link.style.cursor = 'pointer';
+        });
+        link.addEventListener('mouseout', () => {
+          link.style.backgroundColor = '';
+          link.style.color = '';
+        });
+        link.addEventListener('click', () => {
+          const filename = link.dataset.obj;
+          fetch(filename)
+            .then(response => response.text())
+            .then(text => {
+              // Mostra contenuto .obj nella tab OBJ
+              displayObjText(text);
+              // Carica il nuovo modello nella scena 3D
+              loadObjFromText(text);
+            })
+            .catch(error => {
+              console.error('Errore nel caricamento del file OBJ:', error);
+            });
+        });
+      });
     }
 
-    // ⬇ Evidenzia link progetti nel tab "note"
-    if (btn.dataset.tab === 'note') highlightObjLinks(); 
-  });
-});
+    const fileList = ["teapot.obj", "standford_bunny.obj","cube.obj"];
+    let noteContent = "Clicca per caricare un modello OBJ:<br>";
 
-
-// trasforma link in tempo reale
-//document.getElementById('tab-note').addEventListener('input', () => {
- //highlightObjLinks();
-//});
-
-function highlightObjLinks() {
-  const noteTab = document.getElementById('tab-note');
-  const links = noteTab.querySelectorAll('.obj-link');
-  links.forEach(link => {
-    link.addEventListener('mouseover', () => {
-      link.style.backgroundColor = 'blue';
-      link.style.color = 'white';
-      link.style.cursor = 'pointer';
+    fileList.forEach(file => {
+      noteContent += `- <span class="obj-link" data-obj="${file}">${file}</span><br>`;
     });
-    link.addEventListener('mouseout', () => {
-      link.style.backgroundColor = '';
-      link.style.color = '';
-    });
-    link.addEventListener('click', () => {
-      const filename = link.dataset.obj;
-      fetch(filename)
-        .then(response => response.text())
-        .then(text => {
-          // Mostra contenuto .obj nella tab OBJ
-          document.getElementById('tab-obj').value = text;
-          // Carica il nuovo modello nella scena 3D
-          loadObjFromText(text); // Cambia qui per caricare il modello dal testo
-        })
-        .catch(error => {
-          console.error('Errore nel caricamento del file OBJ:', error);
-        });
-    });
-  });
-}
 
-const fileList = ["teapot.obj", "standford_bunny.obj","cube.obj"];
-let noteContent = "Clicca per caricare un modello OBJ:<br>";
-
-fileList.forEach(file => {
-  noteContent += `- <span class="obj-link" data-obj="${file}">${file}</span><br>`;
-});
-
-document.getElementById('tab-note').innerHTML = noteContent;
-highlightObjLinks();
-
-       
-
+    document.getElementById('tab-note').innerHTML = noteContent;
+    highlightObjLinks();
   </script>
 </body>
 </html>
