@@ -24,11 +24,13 @@ Il cubo come si può vedere nel video appare all'interno della schermata. Decido
 ## Design dell’interfraccia e modalità di interazione
 L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stessa cosa vale per il testo. l'oggetto tridimensionale inoltre lo puoi muovere all'interno dello spazio semplicemente cliccandolo. Lo si può ruotare a 360 gradi ed ingrandire e rimpicciole. Per far si che tu possa giocarci come vuoi, l'oggetto lo si può vedere anche dietro al testo, oppure puoi semplicemente nascondere la parte scritta.
 
-Un'altra interazione interessante, riguarda il riquadro che si trova a destra. Vi sono tre sezioni al suo interno: una in cui visualizzi il codice del modello 3D (OBJ), una in cui poi cambiare e scegliere un altro file obj (file OBJ), mentre l'ultima poi inserire te un codice obj differente (Play).
+Un'altra interazione interessante, riguarda il riquadro che si trova a destra. Vi sono tre sezioni al suo interno: una in cui visualizzi il codice del modello 3D (codice), una in cui poi cambiare e scegliere un altro file obj (file OBJ), mentre l'ultima poi inserire te un codice obj differente (Play).
 
 [<img src="doc/one.jpg" width="800" alt="one">]()
 [<img src="doc/two.jpg" width="800" alt="two">]() 
 [<img src="doc/three.jpg" width="800" alt="three">]()
+
+Inoltre all'interno della sezione "codice" poi anche visualizzare i vertici e le facce corrispondenti alla parte di codice in cui fai mouse hover.
 
 
 ## Tecnologia usata
