@@ -26,9 +26,9 @@ L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia inf
 
 Un'altra interazione interessante, riguarda il riquadro che si trova a destra. Vi sono tre sezioni al suo interno: una in cui visualizzi il codice del modello 3D (codice), una in cui poi cambiare e scegliere un altro file obj (file OBJ), mentre l'ultima poi inserire te un codice obj differente (Play).
 
-[<img src="doc/one.jpg" width="800" alt="one">]()
-[<img src="doc/two.jpg" width="800" alt="two">]() 
-[<img src="doc/three.jpg" width="800" alt="three">]()
+[<img src="doc/one.jpg" width="800" alt="foto one">]()
+[<img src="doc/two.jpg" width="800" alt="foto two">]() 
+[<img src="doc/three.jpg" width="800" alt="foto three">]()
 
 Inoltre all'interno della sezione "codice" poi anche visualizzare i vertici e le facce corrispondenti alla parte di codice in cui fai mouse hover.
 
