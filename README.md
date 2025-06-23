@@ -54,19 +54,9 @@ f 5 6 2 1
 f 2 6 7 3
 ```
 
-Questo codice rappreseta un modello 3D, più precisamente un cubo.
+Questo codice rappreseta un modello 3D, più precisamente un cubo ed è composto da vertci (es. v -1.000000 1.000000 1.000000 ) e facce (es. f 1 2 3 4).
 
 
-```mtl file
-newmtl shinyred
-Ka  0.1985  0.0000  0.0000
-Kd  0.5921  0.0167  0.0000
-Ks  0.5973  0.2083  0.2083
-illum 2
-Ns 100.2235
-```
-
-Questo invece è il codice presente all'interno di un file mtl e specificamente con esso si dovrebbe visualizzare una superficie di tipo metallica.
 
 ## Target e contesto d’uso
 Questo articolo è stato principalmente crearto con l'intenzione di essere mostrato/visto agli studenti che frequentano il Bachelor di Comunicazione Visiva, più specificamente per chi frequenta o vorrà frequentare la classe di Interaction Design. L'articolo in sè ha lo scopo principale di essere una fonte di informazione, di incuriosire, oltre che ha mostrare le varie interazioni che si possono creare al'interno di un file html tramite il codice ed invogliare la gente a restare un po' più a lungo sulla pagina. 
