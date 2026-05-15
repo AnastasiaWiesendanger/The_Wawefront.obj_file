@@ -24,7 +24,7 @@ Il cubo come si può vedere nel video appare all'interno della schermata. Decido
 ## Design dell’interfraccia e modalità di interazione
 L'interfaccia in se è stata elaborata affinché tu possa trovare tutto (sia informazioni che le animazioni) all'interno di una singola pagina. Lo sfondo nero è stato scelto affinché il modello 3D possa risultare più evidente sul background, stessa cosa vale per il testo. l'oggetto tridimensionale lo puoi osservare da varie angolazioni semplicemente cliccando, tenendo premuto il mouse e trascinandolo. Puoi anche osservarlo sia da lontano che da vicino per osservare meglio la sua forma. Per far si che tu possa guardare l'oggetto 3D anche in grande dimesioni, il testo è stato fatto senza uno sfondo dietro di se, così che si possa vedere l'oggetto anche dietro le scritte.
 
-Un'altra interazione interessante, riguarda il riquadro che si trova a destra. Vi sono tre sezioni al suo interno: una in cui visualizzi il codice del modello 3D (codice) e volendo scaricarlo cliccando "scarica", una in cui poi cambiare e scegliere un altro file obj (file OBJ), mentre l'ultima poi inserire da te un codice obj differente (Play) e per visualizzarlo bisogna cliccare "Aggiorna modello".
+Un'altra interazione interessante, riguarda il riquadro che si trova a destra. Vi sono tre sezioni al suo interno: una in cui visualizzi il codice del modello 3D (codice) e volendo scaricarlo cliccando "Scarica OBJ", una in cui poi cambiare e scegliere un altro file obj (file OBJ), mentre l'ultima poi inserire da te un codice obj differente (Play) e per visualizzarlo bisogna cliccare "Aggiorna modello".
 
 [<img src="doc/one.jpg" width="800" alt="foto one">]()
 [<img src="doc/two.jpg" width="800" alt="foto two">]() 
